@@ -3,6 +3,7 @@ import MusicSection from "./components/MusicSection/MusicSection";
 import { ThemeProvider } from "styled-components";
 import { GlobalStyles } from "./styles/globalStyles";
 import { theme } from "./styles/theme";
+import TourSection from "./components/TourSection/TourSection";
 
 function App() {
   return (
@@ -10,6 +11,7 @@ function App() {
       <GlobalStyles />
       <Hero />
       <MusicSection />
+      <TourSection />
     </ThemeProvider>
   );
 }
