@@ -43,16 +43,6 @@ export const TrilogySection = styled.div`
   margin-bottom: 8rem;
 `;
 
-export const TrilogyLabel = styled.h3`
-  font-size: 0.875rem;
-  font-weight: 700;
-  letter-spacing: 4px;
-  color: ${RammaRed};
-  text-align: center;
-  margin-bottom: 3rem;
-  opacity: 0.9;
-`;
-
 export const TrilogyDisplay = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -162,7 +152,6 @@ export const DetailDescription = styled.p`
   font-size: 1rem;
   color: #ccc;
   line-height: 1.6;
-  margin-bottom: 2rem;
 `;
 
 export const PlatformLinks = styled.div`
@@ -193,20 +182,14 @@ export const PlatformButton = styled.a`
     color: ${RammaBlack};
     transform: translateX(4px);
   }
-`;
 
-export const SpotifyIcon = styled.div`
-  width: 24px;
-  height: 24px;
-  background: currentColor;
-  border-radius: 50%;
+  & svg {
+    width: 24px;
+    height: 24px;
+    color: inherit; 
+    flex-shrink: 0;
+  }
 `;
-
-export const YoutubeIcon = styled(SpotifyIcon)`
-  border-radius: 4px;
-`;
-
-export const AppleIcon = styled(SpotifyIcon)``;
 
 export const TrilogyNav = styled.div`
   display: flex;
@@ -330,6 +313,10 @@ export const PlayIcon = styled.div`
 `;
 
 // SINGLES
+interface SinglesIconProps {
+  profilePicUrl: string;
+}
+
 export const SinglesSection = styled.a`
   display: block;
   position: relative;
@@ -362,13 +349,21 @@ export const SinglesContent = styled.div`
   }
 `;
 
-export const SinglesIcon = styled.div`
+export const SinglesIcon = styled.div<SinglesIconProps>`
   width: 80px;
   height: 80px;
   border-radius: 50%;
-  background: ${RammaRed}20;
   border: 2px solid ${RammaRed};
   flex-shrink: 0;
+
+  /* Estilos para la imagen de fondo */
+  background-image: url(${(props) => props.profilePicUrl});
+  background-size: cover; /* Asegura que la imagen cubra todo el círculo */
+  background-position: center; /* Centra la imagen */
+  background-repeat: no-repeat; /* Evita que la imagen se repita */
+  
+  /* Puedes mantener el color de fondo como fallback o superposición sutil */
+  background-color: ${RammaRed}20;
 
   @media (max-width: 640px) {
     width: 60px;
