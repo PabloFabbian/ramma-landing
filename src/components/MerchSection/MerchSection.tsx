@@ -24,7 +24,7 @@ const merchItems = [
 
 const MerchSection: React.FC = () => {
     return (
-        <Section>
+        <Section id="merch">
             <Title>Official Merch</Title>
             <MerchGrid>
                 {merchItems.map((item) => (
