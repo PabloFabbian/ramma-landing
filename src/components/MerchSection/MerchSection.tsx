@@ -1,39 +1,41 @@
 import React from "react";
-import { Section, Title, MerchGrid, MerchItem, ItemImage, ItemInfo, ItemName, ItemPrice, BuyButton } from "./styles";
-
-const merchItems = [
-    {
-        id: 1,
-        name: "Ramma Hoodie",
-        price: "$60",
-        image: "/src/assets/images/hoodie.jpg",
-    },
-    {
-        id: 2,
-        name: "Ramma T-shirt",
-        price: "$35",
-        image: "/src/assets/images/tshirt.jpg",
-    },
-    {
-        id: 3,
-        name: "Ramma Cap",
-        price: "$25",
-        image: "/src/assets/images/cap.jpg",
-    },
-];
+import { Section, Title, MerchGrid, MerchItem, ItemImage, ItemInfo, ItemName, ItemPrice, OriginalPrice, DiscountBadge, PaymentInfo, BuyButton, StockIndicator } from "./styles";
+import { merchItems } from "../../data/merchItems";
 
 const MerchSection: React.FC = () => {
     return (
         <Section id="merch">
-            <Title>Official Merch</Title>
+            <Title>OFFICIAL MERCH</Title>
             <MerchGrid>
                 {merchItems.map((item) => (
                     <MerchItem key={item.id}>
+                        {item.discount && <DiscountBadge>{item.discount} OFF</DiscountBadge>}
+                        {item.stock === "low" && <StockIndicator>Últimas unidades</StockIndicator>}
+
                         <ItemImage src={item.image} alt={item.name} />
+
                         <ItemInfo>
                             <ItemName>{item.name}</ItemName>
-                            <ItemPrice>{item.price}</ItemPrice>
-                            <BuyButton>Buy Now</BuyButton>
+
+                            <ItemPrice>
+                                <span>{item.price}</span>
+                                {item.originalPrice && <OriginalPrice>{item.originalPrice}</OriginalPrice>}
+                            </ItemPrice>
+
+                            <PaymentInfo>
+                                {item.paymentMethods.map((payment: { method: string; discount?: string; finalPrice?: string; installments?: string }, index: number) => (
+                                    <div key={index}>
+                                        <strong>{payment.method}:</strong>
+                                        {payment.discount && ` ${payment.discount}`}
+                                        {payment.finalPrice && ` • ${payment.finalPrice}`}
+                                        {payment.installments && ` • ${payment.installments}`}
+                                    </div>
+                                ))}
+                            </PaymentInfo>
+
+                            <BuyButton>
+                                COMPRAR
+                            </BuyButton>
                         </ItemInfo>
                     </MerchItem>
                 ))}
